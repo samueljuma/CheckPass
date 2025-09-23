@@ -1,4 +1,4 @@
-package com.samueljuma.checkpass.ui.theme
+package com.samueljuma.checkpass.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

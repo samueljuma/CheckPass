@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 android {
@@ -56,4 +57,11 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(libs.bundles.lifecycle)
+    implementation(libs.zxing.core)
+    implementation(libs.bundles.koin)
+    implementation(libs.bundles.networking)
+    implementation(libs.accompanist.permissions)
+
 }

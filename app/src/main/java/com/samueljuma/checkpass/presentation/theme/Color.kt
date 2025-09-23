@@ -1,4 +1,4 @@
-package com.samueljuma.checkpass.ui.theme
+package com.samueljuma.checkpass.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
