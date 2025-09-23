@@ -15,8 +15,12 @@ kotlinx-serialization-json = "1.9.0"
 kotlinxCoroutines = "1.10.2"
 koin = "4.1.1"
 zxing-core = "3.5.3"
+navigationCompose = "2.9.3"
 
 accompanist-permissions = "0.37.3"
+camerax = "1.5.0"
+mlkit-barcode = "17.3.0"
+navigationRuntimeKtx = "2.9.4"
 
 
 [libraries]
@@ -34,6 +38,8 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
 
 #dependency injection - koin
 koin-core = { module ="io.insert-koin:koin-core", version.ref = "koin"}
@@ -61,6 +67,13 @@ kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 # Accompanist Permissions
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist-permissions" }
 
+# QR Code Scanner
+camerax-core = { module = "androidx.camera:camera-core", version.ref = "camerax" }
+camerax-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "camerax" }
+camerax-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "camerax" }
+camerax-view = { module = "androidx.camera:camera-view", version.ref = "camerax" }
+mlkit-barcode = { module = "com.google.mlkit:barcode-scanning", version.ref = "mlkit-barcode" }
+camerax-mlkit = { module = "androidx.camera:camera-mlkit-vision", version.ref = "camerax" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -73,3 +86,4 @@ lifecycle = ["lifecycle-viewmodel-compose", "compose-lifecycle"]
 networking = [ "ktor-client-core", "ktor-client-android", "ktor-client-cio","ktor-client-auth", "ktor-client-content-negotiation",
     "ktor-client-logging", "ktor-serialization-kotlinx-json", "kotlinx-coroutines-android", "kotlinx-serialization-json"]
 koin = [ "koin-core", "koin-android","koin-androidx-compose"]
+scanning = ["camerax-core", "camerax-camera2", "camerax-lifecycle", "camerax-view", "mlkit-barcode", "camerax-mlkit"]

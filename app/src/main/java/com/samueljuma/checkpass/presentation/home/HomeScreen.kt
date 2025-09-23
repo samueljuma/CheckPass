@@ -29,15 +29,32 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import com.samueljuma.checkpass.R
 import com.samueljuma.checkpass.presentation.core.CameraPermissionHandler
+import com.samueljuma.checkpass.presentation.navigation.AppScreens
+import com.samueljuma.checkpass.utils.CollectOneTimeEvent
 import com.samueljuma.checkpass.utils.isPDADevice
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    viewModel: ScannerViewModel,
+    navController: NavController
+) {
 
     val context = LocalContext.current
     var cameraClicked by remember { mutableStateOf(false) }
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
+    CollectOneTimeEvent(viewModel.event) {
+        when(it){
+            is ScannerEvent.NavigateToCameraScanner -> {
+                navController.navigate(AppScreens.CameraScannerScreen.route)
+            }
+            else -> {}
+        }
+    }
     Scaffold(
         topBar = {},
         floatingActionButton = {
@@ -67,9 +84,8 @@ fun HomeScreen() {
                     CameraPermissionHandler(
                         onGranted = {
                             if(cameraClicked){
-                                Toast.makeText(context, "Permission Granted", Toast.LENGTH_SHORT).show()
+                                viewModel.triggerNavigationToCameraScanner()
                             }
-
                         },
                         cameraIconClicked = cameraClicked,
                         onCameraIconClicked = { cameraClicked = false }
@@ -79,6 +95,15 @@ fun HomeScreen() {
                     painter = painterResource(id = R.drawable.check_pass),
                     contentDescription = "Logo"
                 )
+
+                state.scannedQrCode?.let {
+                    Text(
+                        text = "Scanned Code $it",
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                }
 
                 if(isPDADevice()){
                     Spacer(modifier = Modifier.height(32.dp))
