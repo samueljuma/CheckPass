@@ -4,11 +4,17 @@ import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,9 +26,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.samueljuma.checkpass.R
 import com.samueljuma.checkpass.presentation.core.CameraPermissionHandler
+import com.samueljuma.checkpass.utils.isPDADevice
 
 @Composable
 fun HomeScreen() {
@@ -32,17 +41,20 @@ fun HomeScreen() {
     Scaffold(
         topBar = {},
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = { cameraClicked = true },
-                modifier = Modifier.padding(16.dp),
-                containerColor = colorResource(R.color.green)
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.camera_ic),
-                    contentDescription = "Camera Icon",
-                    tint = Color.White
-                )
+            if(!isPDADevice()){
+                FloatingActionButton(
+                    onClick = { cameraClicked = true },
+                    modifier = Modifier.padding(16.dp),
+                    containerColor = colorResource(R.color.green)
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.camera_ic),
+                        contentDescription = "Camera Icon",
+                        tint = Color.White
+                    )
+                }
             }
+
         },
         content = { paddingValues ->
             Column(
@@ -67,6 +79,23 @@ fun HomeScreen() {
                     painter = painterResource(id = R.drawable.check_pass),
                     contentDescription = "Logo"
                 )
+
+                if(isPDADevice()){
+                    Spacer(modifier = Modifier.height(32.dp))
+                    Icon(
+                        imageVector = Icons.Outlined.Info,
+                        contentDescription = "Info Icon",
+                    )
+                    Text(
+                        modifier = Modifier.padding(16.dp),
+                        text = "Use Scan Button on your device to scan QR Codes",
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                }
+
             }
         }
     )
