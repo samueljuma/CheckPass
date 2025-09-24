@@ -24,9 +24,6 @@ fun AppNavigation(){
         composable(route = AppScreens.CameraScannerScreen.route) {
             CameraScannerScreen(
                 navController = navController,
-                onResult = { result ->
-                    viewModel.onQrCodeScanned(result)
-                },
                 viewModel = viewModel
             )
         }

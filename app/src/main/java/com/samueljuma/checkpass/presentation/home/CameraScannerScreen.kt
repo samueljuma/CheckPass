@@ -8,24 +8,28 @@ import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation.NavController
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
+import com.samueljuma.checkpass.data.CameraScannerManager
+import com.samueljuma.checkpass.domain.ScannerManager
 import com.samueljuma.checkpass.utils.CollectOneTimeEvent
+import org.koin.compose.getKoin
 
 @Composable
 fun CameraScannerScreen(
     navController: NavController,
-    onResult: (String) -> Unit,
     viewModel: ScannerViewModel
 ){
-    val context = LocalContext.current
+    val lifecycleOwner = LocalLifecycleOwner.current
 
     CollectOneTimeEvent(viewModel.event) {
         when (it) {
@@ -36,45 +40,21 @@ fun CameraScannerScreen(
         }
     }
 
+    val scannerManager = getKoin().get<ScannerManager>() as CameraScannerManager
+
+    // Start scanning when the screen appears, stop when leaving
+    DisposableEffect(lifecycleOwner) {
+        scannerManager.attachLifecycleOwner(lifecycleOwner)
+        viewModel.startScan()
+
+        onDispose {
+            viewModel.stopScan()
+        }
+    }
+
     AndroidView(
         modifier = Modifier.fillMaxSize(),
-        factory = { ctx ->
-            val previewView = PreviewView(ctx).apply {
-                layoutParams = ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT
-                )
-            }
-
-            val cameraController = LifecycleCameraController(ctx).apply {
-                bindToLifecycle(context as LifecycleOwner)
-                cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-
-                val options = BarcodeScannerOptions.Builder()
-                    .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
-                    .build()
-                val barcodeScanner = BarcodeScanning.getClient(options)
-
-                setImageAnalysisAnalyzer(
-                    ContextCompat.getMainExecutor(ctx),
-                    MlKitAnalyzer(
-                        listOf(barcodeScanner),
-                        COORDINATE_SYSTEM_VIEW_REFERENCED,
-                        ContextCompat.getMainExecutor(ctx)
-                    ) { result ->
-                        val barcodes = result?.getValue(barcodeScanner)
-                        barcodes?.forEach { barcode ->
-                            barcode.rawValue?.let { code ->
-                                onResult(code) // Pass the result to the callback
-                            }
-                        }
-                    }
-                )
-            }
-
-            previewView.controller = cameraController
-            previewView
-
-        }
+        factory = { scannerManager.previewView }
     )
+
 }
