@@ -6,17 +6,15 @@ import androidx.compose.runtime.Composable
 
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = primaryLight,
+    secondary = secondaryLight,
+    tertiary = tertiaryLight
 )
 
 @Composable
 fun CheckPassTheme(content: @Composable () -> Unit) {
-    val colorScheme =  LightColorScheme
-
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = LightColorScheme,
         typography = Typography,
         content = content
     )

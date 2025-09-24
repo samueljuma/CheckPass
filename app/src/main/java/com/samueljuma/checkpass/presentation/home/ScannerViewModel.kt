@@ -1,10 +1,7 @@
 package com.samueljuma.checkpass.presentation.home
 
-import androidx.camera.view.PreviewView
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.samueljuma.checkpass.data.CameraScannerManager
 import com.samueljuma.checkpass.domain.ScannerManager
 import com.samueljuma.checkpass.utils.isPDADevice
 import kotlinx.coroutines.channels.Channel

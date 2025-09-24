@@ -1,6 +1,5 @@
 package com.samueljuma.checkpass.presentation.home
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
