@@ -1,5 +1,6 @@
 package com.samueljuma.checkpass.presentation.home
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -46,10 +47,23 @@ fun HomeScreen(
     var cameraClicked by remember { mutableStateOf(false) }
     val state by viewModel.state.collectAsStateWithLifecycle()
 
+    when{
+        state.passengerToCheckIn != null -> {
+            PassengerCheckInDialog(
+                onDismiss = { viewModel.onPassCheckInAction(PassCheckInAction.DismissCheckInDialog) },
+                onCheckIn = { viewModel.onPassCheckInAction(PassCheckInAction.CheckInPassenger(state.passengerToCheckIn!!)) },
+                passenger = state.passengerToCheckIn!!
+            )
+        }
+    }
+
     CollectOneTimeEvent(viewModel.event) {
         when(it){
             is ScannerEvent.NavigateToCameraScanner -> {
                 navController.navigate(AppScreens.CameraScannerScreen.route)
+            }
+            is ScannerEvent.ShowToastMessage -> {
+                Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
             }
             else -> {}
         }
@@ -96,12 +110,21 @@ fun HomeScreen(
                 )
 
                 state.scannedQrCode?.let {
-                    Text(
-                        text = "Scanned Code $it",
-                        style = MaterialTheme.typography.bodyMedium.copy(
-                            fontWeight = FontWeight.Bold
+                    if(state.passengerToCheckIn == null){
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = "Info Icon",
+                            tint = MaterialTheme.colorScheme.error
                         )
-                    )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = "Passenger with $it not found",
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                fontWeight = FontWeight.Bold,
+                                color =  MaterialTheme.colorScheme.error
+                            )
+                        )
+                    }
                 }
 
                 if(isPDADevice()){

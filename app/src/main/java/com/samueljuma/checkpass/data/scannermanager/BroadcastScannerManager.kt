@@ -1,4 +1,4 @@
-package com.samueljuma.checkpass.data
+package com.samueljuma.checkpass.data.scannermanager
 
 import android.annotation.SuppressLint
 import android.content.BroadcastReceiver

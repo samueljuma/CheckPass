@@ -7,6 +7,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
+import com.samueljuma.checkpass.data.models.Passenger
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
@@ -46,4 +47,10 @@ fun <T> CollectOneTimeEvent(
             }
         }
     }
+}
+
+typealias PassengerList = List<Passenger>
+
+fun PassengerList.findPassengerByTicketNumber(ticketNumber: String): Passenger? {
+    return this.find { it.ticket_number == ticketNumber }
 }

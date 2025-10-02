@@ -1,13 +1,15 @@
 package com.samueljuma.checkpass.presentation.home
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation.NavController
-import com.samueljuma.checkpass.data.CameraScannerManager
+import com.samueljuma.checkpass.data.scannermanager.CameraScannerManager
 import com.samueljuma.checkpass.domain.ScannerManager
 import com.samueljuma.checkpass.utils.CollectOneTimeEvent
 import org.koin.compose.getKoin
@@ -18,9 +20,10 @@ fun CameraScannerScreen(
     viewModel: ScannerViewModel
 ){
     val lifecycleOwner = LocalLifecycleOwner.current
+    val context = LocalContext.current
 
-    CollectOneTimeEvent(viewModel.event) {
-        when (it) {
+    CollectOneTimeEvent(viewModel.event) { event ->
+        when (event) {
             is ScannerEvent.NavigateBack -> {
                 navController.popBackStack()
             }

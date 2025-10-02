@@ -1,6 +1,7 @@
-package com.samueljuma.checkpass.data
+package com.samueljuma.checkpass.data.scannermanager
 
 import android.content.Context
+import android.view.ViewGroup
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis.COORDINATE_SYSTEM_VIEW_REFERENCED
 import androidx.camera.mlkit.vision.MlKitAnalyzer
@@ -24,9 +25,9 @@ class CameraScannerManager(
 
     val previewView: PreviewView by lazy {
         PreviewView(context).apply {
-            layoutParams = android.view.ViewGroup.LayoutParams(
-                android.view.ViewGroup.LayoutParams.MATCH_PARENT,
-                android.view.ViewGroup.LayoutParams.MATCH_PARENT
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
             )
         }
     }

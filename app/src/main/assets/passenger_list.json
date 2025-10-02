@@ -1,0 +1,47 @@
+[
+  {
+    "ticket_number": "PNR68328665",
+    "name": "Samuel Juma",
+    "phone_number": "0798114462",
+    "id_number": "35900667346",
+    "seat_number": "11A",
+    "seat_price": 800.0,
+    "onboarded": true
+  },
+  {
+    "ticket_number": "PNR62236846",
+    "name": "Sam",
+    "phone_number": "0798114462",
+    "id_number": "35900667346",
+    "seat_number": "1X",
+    "seat_price": 800.0,
+    "onboarded": false
+  },
+  {
+    "ticket_number": "PNR48133898",
+    "name": "Sam",
+    "phone_number": "0798114462",
+    "id_number": "35900667346",
+    "seat_number": "2",
+    "seat_price": 800.0,
+    "onboarded": false
+  },
+  {
+    "ticket_number": "PNR51806418",
+    "name": "Sam",
+    "phone_number": "0798114462",
+    "id_number": "35900667346",
+    "seat_number": "3",
+    "seat_price": 800.0,
+    "onboarded": false
+  },
+  {
+    "ticket_number": "PNR06263751",
+    "name": "Sam",
+    "phone_number": "0798114462",
+    "id_number": "35900667346",
+    "seat_number": "4",
+    "seat_price": 800.0,
+    "onboarded": false
+  }
+]

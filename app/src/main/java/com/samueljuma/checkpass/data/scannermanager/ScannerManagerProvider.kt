@@ -1,4 +1,4 @@
-package com.samueljuma.checkpass.data
+package com.samueljuma.checkpass.data.scannermanager
 
 import android.content.Context
 import com.samueljuma.checkpass.domain.ScannerManager
