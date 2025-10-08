@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
+import androidx.core.content.ContextCompat
 import com.samueljuma.checkpass.domain.ScannerManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -41,14 +42,19 @@ class BroadcastScannerManager(
         }
     }
 
-    @SuppressLint("UnspecifiedRegisterReceiverFlag")
+
     override fun startScan() {
         val filter = IntentFilter(SCAN_ACTION)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             context.registerReceiver(scanReceiver, filter, Context.RECEIVER_EXPORTED)
         } else {
-            context.registerReceiver(scanReceiver, filter)
+            ContextCompat.registerReceiver(
+                context,
+                scanReceiver,
+                filter,
+                ContextCompat.RECEIVER_NOT_EXPORTED
+            )
         }
     }
 

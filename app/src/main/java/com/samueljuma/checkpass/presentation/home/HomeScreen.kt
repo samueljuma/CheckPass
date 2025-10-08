@@ -94,15 +94,15 @@ fun HomeScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                    CameraPermissionHandler(
-                        onGranted = {
-                            if(cameraClicked){
-                                viewModel.triggerNavigationToCameraScanner()
-                            }
-                        },
-                        cameraIconClicked = cameraClicked,
-                        onCameraIconClicked = { cameraClicked = false }
-                    )
+                CameraPermissionHandler(
+                    onGranted = {
+                        if(cameraClicked){
+                            viewModel.triggerNavigationToCameraScanner()
+                        }
+                    },
+                    cameraIconClicked = cameraClicked,
+                    resetCameraIconClick = { cameraClicked = false }
+                )
 
                 Image(
                     painter = painterResource(id = R.drawable.check_pass),

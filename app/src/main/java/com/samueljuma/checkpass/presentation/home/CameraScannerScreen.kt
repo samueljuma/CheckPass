@@ -20,14 +20,13 @@ fun CameraScannerScreen(
     viewModel: ScannerViewModel
 ){
     val lifecycleOwner = LocalLifecycleOwner.current
-    val context = LocalContext.current
 
     CollectOneTimeEvent(viewModel.event) { event ->
         when (event) {
             is ScannerEvent.NavigateBack -> {
                 navController.popBackStack()
             }
-            else -> {}
+            else -> Unit
         }
     }
 
