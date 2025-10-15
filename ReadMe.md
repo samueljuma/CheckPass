@@ -1,4 +1,4 @@
-# CheckPass
+ # CheckPass
 
 >CheckPass is an Android app designed to streamline passenger check-in for buses by enabling agents to quickly scan QR codes on tickets, instantly retrieving and displaying passenger details for check-in or cancellation.
 
@@ -33,8 +33,8 @@
 3. **Core logic adapts to device type** automatically.
 
 ### App Demo
-| <img src="media/check.gif"/> |
-|:----------------------------:|
+| <img src="media/check.gif" width="250"/> |
+|:----------------------------------------:|
 
 ## Code Highlights
 
