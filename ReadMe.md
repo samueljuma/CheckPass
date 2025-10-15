@@ -32,6 +32,10 @@
 2. **Passenger details appear in a dialog**; the agent can check in or cancel.
 3. **Core logic adapts to device type** automatically.
 
+### App Demo
+| <img src="media/check.gif"/> |
+|:----------------------------:|
+
 ## Code Highlights
 
 - **BroadcastReceiver** for handling hardware scan events on PDA devices.
