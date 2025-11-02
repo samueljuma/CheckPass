@@ -53,7 +53,7 @@ class BroadcastScannerManager(
                 context,
                 scanReceiver,
                 filter,
-                ContextCompat.RECEIVER_NOT_EXPORTED
+                ContextCompat.RECEIVER_EXPORTED
             )
         }
     }

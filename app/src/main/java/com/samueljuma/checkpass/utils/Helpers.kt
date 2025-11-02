@@ -50,7 +50,5 @@ fun <T> CollectOneTimeEvent(
 }
 
 typealias PassengerList = List<Passenger>
+fun PassengerList.findPassengerByTicketNumber(ticketNumber: String): Passenger? = this.find { it.ticket_number == ticketNumber }
 
-fun PassengerList.findPassengerByTicketNumber(ticketNumber: String): Passenger? {
-    return this.find { it.ticket_number == ticketNumber }
-}

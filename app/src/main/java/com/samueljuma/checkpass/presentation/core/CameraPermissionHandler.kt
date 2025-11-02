@@ -19,7 +19,7 @@ import com.google.accompanist.permissions.shouldShowRationale
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun CameraPermissionHandler(
-    onGranted: @Composable () -> Unit,
+    onGranted: () -> Unit,
     cameraIconClicked: Boolean,
     resetCameraIconClick : () -> Unit
 ){
