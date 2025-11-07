@@ -1,5 +1,6 @@
 package com.samueljuma.checkpass.presentation.home
 
+import android.view.View
 import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -30,11 +31,10 @@ fun CameraScannerScreen(
         }
     }
 
-    val scannerManager = getKoin().get<ScannerManager>() as CameraScannerManager
-
     // Start scanning when the screen appears, stop when leaving
-    DisposableEffect(lifecycleOwner) {
-        scannerManager.attachLifecycleOwner(lifecycleOwner)
+    DisposableEffect(Unit) {
+        viewModel.attachLifecycleOwner(lifecycleOwner)
+
         viewModel.startScan()
 
         onDispose {
@@ -44,7 +44,7 @@ fun CameraScannerScreen(
 
     AndroidView(
         modifier = Modifier.fillMaxSize(),
-        factory = { scannerManager.previewView }
+        factory = { viewModel.getPreviewView() as View }
     )
 
 }

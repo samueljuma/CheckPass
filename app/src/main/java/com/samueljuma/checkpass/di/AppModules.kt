@@ -11,9 +11,7 @@ import org.koin.dsl.module
 
 val appModules = module {
 
-    single<ScannerManager> {
-        ScannerManagerProvider.provideScannerManager(androidContext())
-    }
+    single<ScannerManager> { ScannerManagerProvider.provideScannerManager(androidContext()) }
     single<PassengerRepository> { PassengerRepositoryImpl(androidContext()) }
     viewModel { ScannerViewModel(get (), get()) }
 
